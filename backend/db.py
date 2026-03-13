@@ -1,7 +1,7 @@
 import sqlite3
 
 def get_db():
-    conn = sqlite3.connect("backend/medora.db")
+    conn = sqlite3.connect("medora.db")
     conn.row_factory = sqlite3.Row
     return conn
 
