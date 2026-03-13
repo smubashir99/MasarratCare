@@ -27,6 +27,18 @@ def init_db():
             FOREIGN KEY (product_id) REFERENCES products(id)
         )
     """)
+    
+    # Create batch_codes table to store unique batch codes for each product
+
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS batch_codes (
+            id         INTEGER PRIMARY KEY AUTOINCREMENT,
+            product_id INTEGER,
+            batch_code TEXT UNIQUE NOT NULL,
+            is_genuine INTEGER DEFAULT 1,
+            FOREIGN KEY (product_id) REFERENCES products(id)
+        )
+    """)
 
     conn.commit()
     conn.close()
