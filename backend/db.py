@@ -39,6 +39,29 @@ def init_db():
             FOREIGN KEY (product_id) REFERENCES products(id)
         )
     """)
+    # Create reviews table to store user reviews for each product
+
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS reviews (
+            id         INTEGER PRIMARY KEY AUTOINCREMENT,
+            product_id INTEGER,
+            reviewer   TEXT,
+            rating     INTEGER,
+            comment    TEXT,
+            FOREIGN KEY (product_id) REFERENCES products(id)
+        )
+    """)
+
+    # Create wishlist table to store user wishlists for products
+
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS wishlist (
+            id         INTEGER PRIMARY KEY AUTOINCREMENT,
+            product_id INTEGER,
+            user_name  TEXT,
+            FOREIGN KEY (product_id) REFERENCES products(id)
+        )
+    """)
 
     conn.commit()
     conn.close()
