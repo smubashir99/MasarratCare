@@ -65,3 +65,24 @@ def delete_shade(id):
     conn.execute("DELETE FROM shades WHERE id=?", [id])
     conn.commit()
     conn.close()
+
+#  BATCH CODES (Authenticity)
+
+def create_batch(product_id, batch_code, is_genuine=1):
+    conn = get_db()
+    conn.execute(
+        "INSERT INTO batch_codes (product_id, batch_code, is_genuine) VALUES (?,?,?)",
+        [product_id, batch_code, is_genuine]
+    )
+    conn.commit()
+    conn.close()
+
+def verify_batch(batch_code):
+    conn = get_db()
+    row = conn.execute(
+        "SELECT * FROM batch_codes WHERE batch_code=?", [batch_code]
+    ).fetchone()
+    conn.close()
+    if row:
+        return dict(row)
+    return None
