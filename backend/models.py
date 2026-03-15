@@ -111,3 +111,28 @@ def delete_review(id):
     conn.execute("DELETE FROM reviews WHERE id=?", [id])
     conn.commit()
     conn.close()
+
+#  WISHLIST
+
+def add_to_wishlist(product_id, user_name):
+    conn = get_db()
+    conn.execute(
+        "INSERT INTO wishlist (product_id, user_name) VALUES (?,?)",
+        [product_id, user_name]
+    )
+    conn.commit()
+    conn.close()
+
+def get_wishlist(user_name):
+    conn = get_db()
+    rows = conn.execute(
+        "SELECT * FROM wishlist WHERE user_name=?", [user_name]
+    ).fetchall()
+    conn.close()
+    return [dict(r) for r in rows]
+
+def remove_from_wishlist(id):
+    conn = get_db()
+    conn.execute("DELETE FROM wishlist WHERE id=?", [id])
+    conn.commit()
+    conn.close()
