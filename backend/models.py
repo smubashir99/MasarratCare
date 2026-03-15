@@ -86,3 +86,28 @@ def verify_batch(batch_code):
     if row:
         return dict(row)
     return None
+
+#  REVIEWS
+
+def create_review(product_id, reviewer, rating, comment):
+    conn = get_db()
+    conn.execute(
+        "INSERT INTO reviews (product_id, reviewer, rating, comment) VALUES (?,?,?,?)",
+        [product_id, reviewer, rating, comment]
+    )
+    conn.commit()
+    conn.close()
+
+def get_reviews_by_product(product_id):
+    conn = get_db()
+    rows = conn.execute(
+        "SELECT * FROM reviews WHERE product_id=?", [product_id]
+    ).fetchall()
+    conn.close()
+    return [dict(r) for r in rows]
+
+def delete_review(id):
+    conn = get_db()
+    conn.execute("DELETE FROM reviews WHERE id=?", [id])
+    conn.commit()
+    conn.close()
