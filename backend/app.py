@@ -3,7 +3,8 @@ from flask_cors import CORS
 from db import init_db
 from models import (
     create_product, get_all_products, update_product, delete_product,
-    create_shade, get_shades_by_product, update_shade, delete_shade
+    create_shade, get_shades_by_product, update_shade, delete_shade,
+    create_batch, verify_batch
 )
 
 app = Flask(__name__)
@@ -70,6 +71,27 @@ def edit_shade(id):
 def remove_shade(id):
     delete_shade(id)
     return jsonify({'message': 'Shade deleted'})
+
+
+#  BATCH / AUTHENTICITY ROUTES
+
+@app.route('/batch', methods=['POST'])
+def add_batch():
+    data = request.get_json()
+    create_batch(
+        data['product_id'],
+        data['batch_code'],
+        data.get('is_genuine', 1)
+    )
+    return jsonify({'message': 'Batch code added'}), 201
+
+@app.route('/batch/verify/<string:code>', methods=['GET'])
+def check_batch(code):
+    result = verify_batch(code)
+    if result:
+        status = 'GENUINE ✅' if result['is_genuine'] else 'FAKE ❌'
+        return jsonify({'status': status, 'data': result})
+    return jsonify({'status': 'NOT FOUND ❓'}), 404
 
 #  PING (For Integration Testing)
 
