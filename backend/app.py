@@ -2,7 +2,8 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from db import init_db
 from models import (
-    create_product, get_all_products, update_product, delete_product
+    create_product, get_all_products, update_product, delete_product,
+    create_shade, get_shades_by_product, update_shade, delete_shade
 )
 
 app = Flask(__name__)
@@ -42,6 +43,33 @@ def edit_product(id):
 def remove_product(id):
     delete_product(id)
     return jsonify({'message': 'Product deleted'})
+
+#  SHADES ROUTES
+
+@app.route('/shades/<int:product_id>', methods=['GET'])
+def get_shades(product_id):
+    return jsonify(get_shades_by_product(product_id))
+
+@app.route('/shades', methods=['POST'])
+def add_shade():
+    data = request.get_json()
+    create_shade(
+        data['product_id'],
+        data['shade_name'],
+        data['hex_code']
+    )
+    return jsonify({'message': 'Shade created'}), 201
+
+@app.route('/shades/<int:id>', methods=['PUT'])
+def edit_shade(id):
+    data = request.get_json()
+    update_shade(id, data['shade_name'], data['hex_code'])
+    return jsonify({'message': 'Shade updated'})
+
+@app.route('/shades/<int:id>', methods=['DELETE'])
+def remove_shade(id):
+    delete_shade(id)
+    return jsonify({'message': 'Shade deleted'})
 
 #  PING (For Integration Testing)
 
