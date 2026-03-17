@@ -1,5 +1,5 @@
 from db import init_db, get_db
-from models import create_product, create_shade
+from models import create_product, create_shade, create_batch
 
 # This script is used to seed the database with initial data for testing and development purposes.
 
@@ -53,6 +53,23 @@ def seed():
     create_shade(3, "Midnight",    "#191970")
 
     print("shades seeded!")
+
+    #  BATCH CODES
+
+    create_batch(1, "MM-LG-2024-001", 1)  # Genuine
+    create_batch(1, "MM-LG-2024-002", 1)  # Genuine
+    create_batch(1, "FAKE-001",        0)  # Fake!
+
+    create_batch(2, "MM-SF-2024-001", 1)  # Genuine
+    create_batch(2, "FAKE-002",        0)  # Fake!
+
+    create_batch(3, "MM-ES-2024-001", 1)  # Genuine
+
+    print("batch codes seeded!")
+
+    print("✅ All sample data ready!")
+    print("Test Genuine: MM-LG-2024-001")
+    print("Test Fake:    FAKE-001")
 
 if __name__ == '__main__':
     seed()
