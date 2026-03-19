@@ -9,6 +9,41 @@
 
 <h1>MasarratCare — Product Authenticity & Shade Finder</h1>
 
+<!--  PRODUCTS SECTION  -->
+
+<section>
+    <h2>Products</h2>
+
+    <div>
+        <h3>Add New Product</h3>
+        <input type="text"   id="p-name"        placeholder="Product Name">
+        <input type="text"   id="p-category"    placeholder="Category (lips/eyes/skin)">
+        <input type="number" id="p-price"       placeholder="Price (Rs.)">
+        <input type="text"   id="p-description" placeholder="Description">
+        <button onclick="addProduct()">Add Product</button>
+    </div>
+
+    <div>
+        <h3>All Products</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="product-list">
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<hr>
+
 <script src="app.js"></script>
 </body>
 </html>
