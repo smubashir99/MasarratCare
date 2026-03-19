@@ -44,6 +44,29 @@
 
 <hr>
 
+<!--  SHADES SECTION  -->
+  
+<section>
+    <h2>Shade Finder</h2>
+
+    <div>
+        <h3>Add Shade</h3>
+        <input type="number" id="s-product-id" placeholder="Product ID">
+        <input type="text"   id="s-name"       placeholder="Shade Name (e.g. Rose Pink)">
+        <input type="text"   id="s-hex"        placeholder="Hex Code (e.g. #FF69B4)">
+        <button onclick="addShade()">Add Shade</button>
+    </div>
+
+    <div>
+        <h3>Find Shades for Product</h3>
+        <input type="number" id="s-search-id" placeholder="Enter Product ID">
+        <button onclick="loadShades()">Find Shades</button>
+        <div id="shade-list"></div>
+    </div>
+</section>
+
+<hr>
+
 <script src="app.js"></script>
 </body>
 </html>
