@@ -45,7 +45,7 @@
 <hr>
 
 <!--  SHADES SECTION  -->
-  
+
 <section>
     <h2>Shade Finder</h2>
 
@@ -66,6 +66,31 @@
 </section>
 
 <hr>
+
+<!--  AUTHENTICITY SECTION   -->
+
+<section>
+    <h2>Authenticity Checker</h2>
+
+    <div>
+        <h3>Add Batch Code</h3>
+        <input type="number" id="b-product-id" placeholder="Product ID">
+        <input type="text"   id="b-code"       placeholder="Batch Code (e.g. MM-2024-001)">
+        <select id="b-genuine">
+            <option value="1">Genuine ✅</option>
+            <option value="0">Fake ❌</option>
+        </select>
+        <button onclick="addBatch()">Add Batch Code</button>
+    </div>
+
+    <div>
+        <h3>Verify Product</h3>
+        <input type="text" id="b-verify" placeholder="Enter Batch Code to verify">
+        <button onclick="verifyBatch()">Check Authenticity</button>
+        <div id="verify-result"></div>
+        <div id="qr-code"></div>
+    </div>
+</section>
 
 <script src="app.js"></script>
 </body>
