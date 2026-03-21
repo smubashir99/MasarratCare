@@ -87,3 +87,46 @@ async function deleteProduct(id) {
 
     loadProducts()
 }
+
+//  SHADES
+
+// add new shade
+
+async function addShade() {
+    const product_id = document.getElementById('s-product-id').value
+    const shade_name = document.getElementById('s-name').value
+    const hex_code   = document.getElementById('s-hex').value
+
+    await fetch(`${API}/shades`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ product_id, shade_name, hex_code })
+    })
+
+    alert('Shade added!')
+}
+
+// load shades for a product
+
+async function loadShades() {
+    const id   = document.getElementById('s-search-id').value
+    const res  = await fetch(`${API}/shades/${id}`)
+    const data = await res.json()
+
+    const div = document.getElementById('shade-list')
+
+    if (data.length === 0) {
+        div.innerHTML = '<p>No shades found.</p>'
+        return
+    }
+
+    div.innerHTML = data.map(s => `
+        <div style="display:inline-block; margin:6px; text-align:center">
+            <div style="width:50px; height:50px; background:${s.hex_code};
+                        border:1px solid #ccc; border-radius:50%"></div>
+            <small>${s.shade_name}</small><br>
+            <small>${s.hex_code}</small>
+        </div>
+    `).join('')
+}
+
