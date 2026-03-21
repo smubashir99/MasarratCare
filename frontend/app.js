@@ -55,3 +55,35 @@ async function addProduct() {
 
 // load products on page open
 loadProducts()
+
+// edit & delete products
+
+async function editProduct(id, name, category, price, description) {
+    const newName  = prompt('New name:',        name)
+    const newCat   = prompt('New category:',    category)
+    const newPrice = prompt('New price:',       price)
+    const newDesc  = prompt('New description:', description)
+
+    await fetch(`${API}/products/${id}`, {
+        method:  'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({
+            name:        newName,
+            category:    newCat,
+            price:       newPrice,
+            description: newDesc
+        })
+    })
+
+    loadProducts()
+}
+
+async function deleteProduct(id) {
+    if (!confirm('Delete this product?')) return
+
+    await fetch(`${API}/products/${id}`, {
+        method: 'DELETE'
+    })
+
+    loadProducts()
+}
