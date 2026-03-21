@@ -1,0 +1,62 @@
+        body { 
+            font-family: Arial, 
+            sans-serif; max-width: 
+            900px; margin: 0 auto; 
+            padding: 20px; 
+        }
+
+        h1{ 
+            color: #b5478a; 
+        }
+        
+        h2   { 
+            color: #333; 
+            border-bottom: 2px solid #b5478a; 
+            padding-bottom: 5px; 
+        }
+        h3   { color: #555; 
+        }
+        
+        input, select { 
+            margin: 5px; 
+            padding: 6px; 
+            width: 200px; 
+        }
+    
+        button { 
+            margin: 5px; 
+            padding: 6px 12px; 
+            background: #b5478a; 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+            border-radius: 4px; 
+        }
+        
+        button:hover { 
+            background: #8e3069; 
+        }
+
+        table { 
+            border-collapse: collapse; 
+            width: 100%; 
+            margin-top: 10px; 
+        }
+        
+        th, td { 
+            padding: 8px; 
+            text-align: left; 
+        }
+        
+        th { 
+            background: #f0d6e8; 
+        }
+        
+        section { 
+            margin-bottom: 30px; 
+        }
+        
+        hr { 
+            margin: 30px 0; 
+            border: 1px solid #ddd; 
+        }
