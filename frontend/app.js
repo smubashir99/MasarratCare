@@ -130,3 +130,45 @@ async function loadShades() {
     `).join('')
 }
 
+//  BATCH / AUTHENTICITY
+
+// add new batch code for a product
+
+async function addBatch() {
+    const product_id = document.getElementById('b-product-id').value
+    const batch_code = document.getElementById('b-code').value
+    const is_genuine = document.getElementById('b-genuine').value
+
+// is_genuine should be 'true' or 'false' as string
+
+    await fetch(`${API}/batch`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ product_id, batch_code, is_genuine })
+    })
+
+    alert('Batch code added!')
+}
+
+// verify batch code and show result with QR code
+
+async function verifyBatch() {
+    const code = document.getElementById('b-verify').value
+    const res  = await fetch(`${API}/batch/verify/${code}`)
+    const data = await res.json()
+
+    document.getElementById('verify-result').innerHTML = `
+        <h3>Result: ${data.status}</h3>
+    `
+
+    // QR Code — External API integration
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${code}`
+    document.getElementById('qr-code').innerHTML = `
+        <p>Batch Code QR:</p>
+        <img src="${qrUrl}" alt="QR Code">
+    `
+}
+
+//  PAGE LOAD PAR CHALE
+
+loadProducts()
