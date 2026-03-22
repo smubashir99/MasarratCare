@@ -151,7 +151,6 @@ async function addBatch() {
 }
 
 // verify batch code and show result with QR code
-
 async function verifyBatch() {
     const code = document.getElementById('b-verify').value
     const res  = await fetch(`${API}/batch/verify/${code}`)
@@ -161,14 +160,18 @@ async function verifyBatch() {
         <h3>Result: ${data.status}</h3>
     `
 
-    // QR Code — External API integration
-    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${code}`
-    document.getElementById('qr-code').innerHTML = `
-        <p>Batch Code QR:</p>
-        <img src="${qrUrl}" alt="QR Code">
-    `
+    // QR code sirf GENUINE products ke liye
+    if (data.data && data.data.is_genuine == 1) {
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${code}`
+        document.getElementById('qr-code').innerHTML = `
+            <p>Batch Code QR:</p>
+            <img src="${qrUrl}" alt="QR Code">
+        `
+    } else {
+        document.getElementById('qr-code').innerHTML = ''
+    }
 }
 
-//  PAGE LOAD PAR CHALE
+// initial load of products
 
 loadProducts()
