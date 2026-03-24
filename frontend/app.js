@@ -125,10 +125,23 @@ async function loadShades() {
             <div style="width:50px; height:50px; background:${s.hex_code};
                         border:1px solid #ccc; border-radius:50%"></div>
             <small>${s.shade_name}</small><br>
-            <small>${s.hex_code}</small>
+            <small>${s.hex_code}</small><br>
+             <button onclick="deleteShade(${s.id})">Delete</button>
         </div>
     `).join('')
 }
+
+async function deleteShade(id) {
+    if (!confirm('Delete this shade?')) return
+
+    await fetch(`${API}/shades/${id}`, {
+        method: 'DELETE'
+    })
+
+    // current product ki shades reload karo
+    loadShades()
+}
+
 
 //  BATCH / AUTHENTICITY
 
