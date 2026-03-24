@@ -126,6 +126,7 @@ async function loadShades() {
                         border:1px solid #ccc; border-radius:50%"></div>
             <small>${s.shade_name}</small><br>
             <small>${s.hex_code}</small><br>
+            <button onclick="editShade(${s.id}, '${s.shade_name}', '${s.hex_code}')">Edit</button>
              <button onclick="deleteShade(${s.id})">Delete</button>
         </div>
     `).join('')
@@ -138,10 +139,28 @@ async function deleteShade(id) {
         method: 'DELETE'
     })
 
-    // current product ki shades reload karo
+    // reload shades for the same product after deletion
     loadShades()
 }
 
+// edit shade details
+async function editShade(id, shade_name, hex_code) {
+    const newName = prompt('New shade name:', shade_name)
+    const newHex  = prompt('New hex code:', hex_code)
+
+    if (!newName || !newHex) return
+   // hex code should start with # and be 7 characters long
+    await fetch(`${API}/shades/${id}`, {
+        method:  'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({
+            shade_name: newName,
+            hex_code:   newHex
+        })
+    })
+
+    loadShades()
+}
 
 //  BATCH / AUTHENTICITY
 
