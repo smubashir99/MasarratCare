@@ -93,6 +93,27 @@ def check_batch(code):
         return jsonify({'status': status, 'data': result})
     return jsonify({'status': 'NOT FOUND ❓'}), 404
 
+#  ADMIN ROUTES FOR BATCH MANAGEMENT
+@app.route('/batch', methods=['GET'])
+def get_all_batches():
+    from models import get_all_batches
+    return jsonify(get_all_batches())
+
+#  Admin can edit batch details (e.g., mark as fake/genuine)
+@app.route('/batch/<int:id>', methods=['PUT'])
+def edit_batch(id):
+    data = request.get_json()
+    from models import update_batch
+    update_batch(id, data['batch_code'], data['is_genuine'])
+    return jsonify({'message': 'Batch updated'})
+
+#  Admin can delete a batch if needed
+@app.route('/batch/<int:id>', methods=['DELETE'])
+def remove_batch(id):
+    from models import delete_batch
+    delete_batch(id)
+    return jsonify({'message': 'Batch deleted'})
+
 #  PING (For Integration Testing)
 
 @app.route('/ping', methods=['GET'])

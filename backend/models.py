@@ -87,6 +87,30 @@ def verify_batch(batch_code):
         return dict(row)
     return None
 
+#  For admin dashboard - list all batch codes
+def get_all_batches():
+    conn = get_db()
+    rows = conn.execute("SELECT * FROM batch_codes").fetchall()
+    conn.close()
+    return [dict(r) for r in rows]
+
+#  For admin dashboard - update batch code info
+def update_batch(id, batch_code, is_genuine):
+    conn = get_db()
+    conn.execute(
+        "UPDATE batch_codes SET batch_code=?, is_genuine=? WHERE id=?",
+        [batch_code, is_genuine, id]
+    )
+    conn.commit()
+    conn.close()
+    
+#  For admin dashboard - delete batch code
+def delete_batch(id):
+    conn = get_db()
+    conn.execute("DELETE FROM batch_codes WHERE id=?", [id])
+    conn.commit()
+    conn.close()
+
 #  REVIEWS
 
 def create_review(product_id, reviewer, rating, comment):

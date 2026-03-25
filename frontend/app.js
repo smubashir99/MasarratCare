@@ -204,6 +204,60 @@ async function verifyBatch() {
     }
 }
 
+// load all batch codes for a product
+async function loadBatches() {
+    const res  = await fetch(`${API}/batch`)
+    const data = await res.json()
+
+    const tbody = document.getElementById('batch-list')
+    tbody.innerHTML = ''
+
+    data.forEach(b => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${b.id}</td>
+                <td>${b.product_id}</td>
+                <td>${b.batch_code}</td>
+                <td>${b.is_genuine == 1 ? 'GENUINE ✅' : 'FAKE ❌'}</td>
+                <td>
+                    <button onclick="editBatch(${b.id}, '${b.batch_code}', ${b.is_genuine})">Edit</button>
+                    <button onclick="deleteBatch(${b.id})">Delete</button>
+                </td>
+            </tr>
+        `
+    })
+}
+
+// edit batch code and genuineness
+async function editBatch(id, batch_code, is_genuine) {
+    const newCode    = prompt('New batch code:', batch_code)
+    const newGenuine = prompt('Genuine? (1 = yes, 0 = no):', is_genuine)
+
+    if (!newCode || newGenuine === null) return
+
+    await fetch(`${API}/batch/${id}`, {
+        method:  'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({
+            batch_code:  newCode,
+            is_genuine:  parseInt(newGenuine)
+        })
+    })
+
+    loadBatches()
+}
+
+// delete batch code
+async function deleteBatch(id) {
+    if (!confirm('Delete this batch code?')) return
+
+    await fetch(`${API}/batch/${id}`, {
+        method: 'DELETE'
+    })
+
+    loadBatches()
+}
+
 // initial load of products
 
 loadProducts()

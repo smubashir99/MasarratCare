@@ -89,7 +89,26 @@
         <button onclick="verifyBatch()">Check Authenticity</button>
         <div id="verify-result"></div>
         <div id="qr-code"></div>
+        
+        <!-- Batch Codes List -->
+    <div>
+        <h3>All Batch Codes</h3>
+        <button onclick="loadBatches()">Load All Batch Codes</button>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Product ID</th>
+                    <th>Batch Code</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="batch-list">
+            </tbody>
+        </table>
     </div>
+        </div>
 </section>
 
 <script src="app.js"></script>
