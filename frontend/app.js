@@ -205,11 +205,26 @@ async function verifyBatch() {
 }
 
 // load all batch codes for a product
+
+let batchTableVisible = false
+
 async function loadBatches() {
+    const tbody = document.getElementById('batch-list')
+    const table = document.getElementById('batch-table')
+    const btn   = document.getElementById('batch-toggle-btn')
+
+    // If the table is already visible, then hide it.
+    if (batchTableVisible) {
+        table.style.display  = 'none'
+        btn.textContent      = 'Load All Batch Codes ▼'
+        batchTableVisible    = false
+        return
+    }
+
+    // If it is hidden, load the data and display it
     const res  = await fetch(`${API}/batch`)
     const data = await res.json()
 
-    const tbody = document.getElementById('batch-list')
     tbody.innerHTML = ''
 
     data.forEach(b => {
@@ -226,6 +241,10 @@ async function loadBatches() {
             </tr>
         `
     })
+
+    table.style.display  = 'table'
+    btn.textContent      = 'Hide Batch Codes ▲'
+    batchTableVisible    = true
 }
 
 // edit batch code and genuineness

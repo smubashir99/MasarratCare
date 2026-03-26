@@ -93,9 +93,9 @@
         <!-- Batch Codes List -->
     <div>
         <h3>All Batch Codes</h3>
-        <button onclick="loadBatches()">Load All Batch Codes</button>
-        <table border="1">
-            <thead>
+        <button id="batch-toggle-btn" onclick="loadBatches()">Load All Batch Codes ▼</button>
+        <table id="batch-table" border="1" style="display:none">
+         <thead>
                 <tr>
                     <th>ID</th>
                     <th>Product ID</th>
