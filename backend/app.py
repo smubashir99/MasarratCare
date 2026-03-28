@@ -140,12 +140,25 @@ def add_review():
         data['comment']
     )
     return jsonify({'message': 'Review added'}), 201
-    
+
 # Deleting a review is done by review ID, which is unique for each review
 @app.route('/reviews/<int:id>', methods=['DELETE'])
 def remove_review(id):
     delete_review(id)
     return jsonify({'message': 'Review deleted'})
+
+# Admin route to view all reviews across products (for moderation purposes)
+@app.route('/reviews', methods=['GET'])
+def get_all_reviews():
+    from db import get_db
+    conn = get_db()
+    rows = conn.execute("""
+        SELECT reviews.*, products.name as product_name 
+        FROM reviews 
+        LEFT JOIN products ON reviews.product_id = products.id
+    """).fetchall()
+    conn.close()
+    return jsonify([dict(r) for r in rows])
 
 if __name__ == '__main__':
     app.run(debug=True)

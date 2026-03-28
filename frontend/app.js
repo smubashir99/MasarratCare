@@ -299,31 +299,32 @@ async function addReview() {
 let reviewTableVisible = false
 
 async function loadReviews() {
-    const id    = document.getElementById('r-search-id').value
     const table = document.getElementById('review-table')
     const btn   = document.getElementById('review-toggle-btn')
-
+    const tbody = document.getElementById('review-list')
+    
     // If the table is already visible, then hide it.
-    if (reviewTableVisible) {
-        table.style.display  = 'none'
-        btn.textContent      = 'Load Reviews ▼'
-        reviewTableVisible   = false
+   if (reviewTableVisible) {
+        table.style.display = 'none'
+        btn.textContent     = 'Load Reviews ▼'
+        reviewTableVisible  = false
         return
     }
 
-    const res   = await fetch(`${API}/reviews/${id}`)
-    const data  = await res.json()
-    const tbody = document.getElementById('review-list')
+    // load reviews and show table
+    const res  = await fetch(`${API}/reviews`)
+    const data = await res.json()
 
     tbody.innerHTML = ''
 
     if (data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5">No reviews found.</td></tr>'
+        tbody.innerHTML = '<tr><td colspan="6">No reviews found.</td></tr>'
     } else {
         data.forEach(r => {
             tbody.innerHTML += `
                 <tr>
                     <td>${r.id}</td>
+                    <td>${r.product_name}</td>
                     <td>${r.reviewer}</td>
                     <td>${'⭐'.repeat(r.rating)}</td>
                     <td>${r.comment}</td>
@@ -335,9 +336,9 @@ async function loadReviews() {
         })
     }
 
-    table.style.display  = 'table'
-    btn.textContent      = 'Hide Reviews ▲'
-    reviewTableVisible   = true
+    table.style.display = 'table'
+    btn.textContent     = 'Hide Reviews ▲'
+    reviewTableVisible  = true
 }
 
 // delete review
