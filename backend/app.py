@@ -160,5 +160,35 @@ def get_all_reviews():
     conn.close()
     return jsonify([dict(r) for r in rows])
 
+#  WISHLIST ROUTES
+
+from models import add_to_wishlist, get_wishlist, remove_from_wishlist
+
+# Fetch wishlist items for a specific user
+@app.route('/wishlist', methods=['GET'])
+def get_all_wishlists():
+    from db import get_db
+    conn = get_db()
+    rows = conn.execute("""
+        SELECT wishlist.*, products.name as product_name
+        FROM wishlist
+        LEFT JOIN products ON wishlist.product_id = products.id
+    """).fetchall()
+    conn.close()
+    return jsonify([dict(r) for r in rows])
+
+# Add a product to the user's wishlist by providing product ID and user name
+@app.route('/wishlist', methods=['POST'])
+def add_wishlist():
+    data = request.get_json()
+    add_to_wishlist(data['product_id'], data['user_name'])
+    return jsonify({'message': 'Added to wishlist'}), 201
+    
+# Remove a product from the user's wishlist by wishlist entry ID (not product ID)
+@app.route('/wishlist/<int:id>', methods=['DELETE'])
+def delete_wishlist(id):
+    remove_from_wishlist(id)
+    return jsonify({'message': 'Removed from wishlist'})
+
 if __name__ == '__main__':
     app.run(debug=True)

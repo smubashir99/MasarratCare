@@ -352,6 +352,91 @@ async function deleteReview(id) {
     loadReviews()
 }
 
+//  WISHLIST
+
+let wishlistTableVisible = false
+
+// add product to wishlist for a user
+async function addWishlist() {
+    const product_id = document.getElementById('w-product-id').value
+    const user_name  = document.getElementById('w-user').value
+
+    if (!product_id || !user_name) {
+        alert('Please enter Product ID and Your Name!')
+        return
+    }
+
+// product_id should be a number
+    await fetch(`${API}/wishlist`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ product_id, user_name })
+    })
+
+    alert('Added to wishlist!')
+
+    // reload wishlist if it is currently visible
+    if (wishlistTableVisible) {
+        wishlistTableVisible = false
+        loadWishlist()
+    }
+}
+
+// load all wishlist items with product names
+async function loadWishlist() {
+    const table = document.getElementById('wishlist-table')
+    const btn   = document.getElementById('wishlist-toggle-btn')
+    const tbody = document.getElementById('wishlist-list')
+
+    // If the table is already visible, then hide it.
+    if (wishlistTableVisible) {
+        table.style.display  = 'none'
+        btn.textContent      = 'Load Wishlist ▼'
+        wishlistTableVisible = false
+        return
+    }
+
+    // load wishlist items and show table
+    const res  = await fetch(`${API}/wishlist`)
+    const data = await res.json()
+
+    tbody.innerHTML = ''
+
+    if (data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4">No wishlist items found.</td></tr>'
+    } else {
+        data.forEach(w => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>${w.id}</td>
+                    <td>${w.product_name}</td>
+                    <td>${w.user_name}</td>
+                    <td>
+                        <button onclick="removeWishlist(${w.id})">Remove</button>
+                    </td>
+                </tr>
+            `
+        })
+    }
+    // show the table and update button text
+    table.style.display  = 'table'
+    btn.textContent      = 'Hide Wishlist ▲'
+    wishlistTableVisible = true
+}
+
+// remove item from wishlist
+async function removeWishlist(id) {
+    if (!confirm('Remove from wishlist?')) return
+
+    await fetch(`${API}/wishlist/${id}`, {
+        method: 'DELETE'
+    })
+
+    // Reload karo
+    wishlistTableVisible = false
+    loadWishlist()
+}
+
 // initial load of products
 
 loadProducts()

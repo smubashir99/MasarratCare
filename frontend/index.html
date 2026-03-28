@@ -146,6 +146,36 @@
     </div>
 </section>
 
+<!--  WISHLIST SECTION    -->
+  
+<section>
+    <h2>Wishlist</h2>
+
+    <div>
+        <h3>Add to Wishlist</h3>
+        <input type="number" id="w-product-id" placeholder="Product ID">
+        <input type="text"   id="w-user"       placeholder="Your Name">
+        <button onclick="addWishlist()">Add to Wishlist</button>
+    </div>
+
+    <div>
+        <h3>View Wishlist</h3>
+        <input type="text" id="w-search-user" placeholder="Enter Your Name">
+        <button id="wishlist-toggle-btn" onclick="loadWishlist()">Load Wishlist ▼</button>
+        <table border="1" id="wishlist-table" style="display:none">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Product Name</th>
+                    <th>User</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="wishlist-list"></tbody>
+        </table>
+    </div>
+</section>
+
 <script src="app.js"></script>
 </body>
 </html>
