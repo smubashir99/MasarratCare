@@ -296,12 +296,24 @@ async function addReview() {
 }
 
 // load reviews for a product
+let reviewTableVisible = false
+
 async function loadReviews() {
     const id    = document.getElementById('r-search-id').value
+    const table = document.getElementById('review-table')
+    const btn   = document.getElementById('review-toggle-btn')
+
+    // If the table is already visible, then hide it.
+    if (reviewTableVisible) {
+        table.style.display  = 'none'
+        btn.textContent      = 'Load Reviews ▼'
+        reviewTableVisible   = false
+        return
+    }
+
     const res   = await fetch(`${API}/reviews/${id}`)
     const data  = await res.json()
     const tbody = document.getElementById('review-list')
-    const table = document.getElementById('review-table')
 
     tbody.innerHTML = ''
 
@@ -323,7 +335,9 @@ async function loadReviews() {
         })
     }
 
-    table.style.display = 'table'
+    table.style.display  = 'table'
+    btn.textContent      = 'Hide Reviews ▲'
+    reviewTableVisible   = true
 }
 
 // delete review
