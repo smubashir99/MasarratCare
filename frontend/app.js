@@ -277,6 +277,66 @@ async function deleteBatch(id) {
     loadBatches()
 }
 
+//  REVIEWS
+
+async function addReview() {
+    const product_id = document.getElementById('r-product-id').value
+    const reviewer   = document.getElementById('r-reviewer').value
+    const rating     = document.getElementById('r-rating').value
+    const comment    = document.getElementById('r-comment').value
+
+    await fetch(`${API}/reviews`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ product_id, reviewer, rating, comment })
+    })
+
+    alert('Review added!')
+    loadReviews()
+}
+
+// load reviews for a product
+async function loadReviews() {
+    const id    = document.getElementById('r-search-id').value
+    const res   = await fetch(`${API}/reviews/${id}`)
+    const data  = await res.json()
+    const tbody = document.getElementById('review-list')
+    const table = document.getElementById('review-table')
+
+    tbody.innerHTML = ''
+
+    if (data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5">No reviews found.</td></tr>'
+    } else {
+        data.forEach(r => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>${r.id}</td>
+                    <td>${r.reviewer}</td>
+                    <td>${'⭐'.repeat(r.rating)}</td>
+                    <td>${r.comment}</td>
+                    <td>
+                        <button onclick="deleteReview(${r.id})">Delete</button>
+                    </td>
+                </tr>
+            `
+        })
+    }
+
+    table.style.display = 'table'
+}
+
+// delete review
+async function deleteReview(id) {
+    if (!confirm('Delete this review?')) return
+
+    await fetch(`${API}/reviews/${id}`, {
+        method: 'DELETE'
+    })
+
+    loadReviews()
+}
+
 // initial load of products
 
 loadProducts()

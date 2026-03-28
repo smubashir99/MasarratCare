@@ -120,5 +120,32 @@ def remove_batch(id):
 def ping():
     return jsonify({'message': 'pong'})
 
+#  REVIEWS ROUTES
+
+from models import create_review, get_reviews_by_product, delete_review
+
+# Reviews are linked to products, so we fetch them by product ID
+@app.route('/reviews/<int:product_id>', methods=['GET'])
+def get_reviews(product_id):
+    return jsonify(get_reviews_by_product(product_id))
+
+# Adding a review requires product ID, reviewer name, rating, and comment
+@app.route('/reviews', methods=['POST'])
+def add_review():
+    data = request.get_json()
+    create_review(
+        data['product_id'],
+        data['reviewer'],
+        data['rating'],
+        data['comment']
+    )
+    return jsonify({'message': 'Review added'}), 201
+    
+# Deleting a review is done by review ID, which is unique for each review
+@app.route('/reviews/<int:id>', methods=['DELETE'])
+def remove_review(id):
+    delete_review(id)
+    return jsonify({'message': 'Review deleted'})
+
 if __name__ == '__main__':
     app.run(debug=True)

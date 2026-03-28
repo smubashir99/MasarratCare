@@ -111,6 +111,41 @@
         </div>
 </section>
 
+<hr>
+
+<!--  REVIEWS SECTION  -->
+  
+<section>
+    <h2>Product Reviews</h2>
+
+    <div>
+        <h3>Add Review</h3>
+        <input type="number" id="r-product-id" placeholder="Product ID">
+        <input type="text"   id="r-reviewer"   placeholder="Your Name">
+        <input type="number" id="r-rating"     placeholder="Rating (1-5)" min="1" max="5">
+        <input type="text"   id="r-comment"    placeholder="Your Comment">
+        <button onclick="addReview()">Add Review</button>
+    </div>
+
+    <div>
+        <h3>View Reviews</h3>
+        <input type="number" id="r-search-id" placeholder="Enter Product ID">
+        <button onclick="loadReviews()">Load Reviews</button>
+        <table border="1" id="review-table" style="display:none">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Reviewer</th>
+                    <th>Rating</th>
+                    <th>Comment</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="review-list"></tbody>
+        </table>
+    </div>
+</section>
+
 <script src="app.js"></script>
 </body>
 </html>
