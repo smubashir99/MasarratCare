@@ -1,62 +1,221 @@
-        body { 
-            font-family: Arial, sans-serif;
-            max-width: 900px;
-            margin: 0 auto; 
-            padding: 20px; 
-        }
+/* ════════════════════════════════
+   IMPORT FONT
+════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-        h1{ 
-            color: #b5478a; 
-        }
-        
-        h2   { 
-            color: #333; 
-            border-bottom: 2px solid #b5478a; 
-            padding-bottom: 5px; 
-        }
-        h3   { color: #555; 
-        }
-        
-        input, select { 
-            margin: 5px; 
-            padding: 6px; 
-            width: 200px; 
-        }
-    
-        button { 
-            margin: 5px; 
-            padding: 6px 12px; 
-            background: #b5478a; 
-            color: white; 
-            border: none; 
-            cursor: pointer; 
-            border-radius: 4px; 
-        }
-        
-        button:hover { 
-            background: #8e3069; 
-        }
+/* ════════════════════════════════
+   GLOBAL
+════════════════════════════════ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        table { 
-            border-collapse: collapse; 
-            width: 100%; 
-            margin-top: 10px; 
-        }
-        
-        th, td { 
-            padding: 8px; 
-            text-align: left; 
-        }
-        
-        th { 
-            background: #f0d6e8; 
-        }
-        
-        section { 
-            margin-bottom: 30px; 
-        }
-        
-        hr { 
-            margin: 30px 0; 
-            border: 1px solid #ddd; 
-        }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4f0f8;
+    color: #2d2d2d;
+    padding: 30px 20px;
+}
+
+/* ════════════════════════════════
+   HEADER
+════════════════════════════════ */
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #b5478a, #7c2d6b);
+    padding: 25px 20px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(181,71,138,0.3);
+}
+
+h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #b5478a;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0d6e8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+hr {
+    display: none;
+}
+
+/* ════════════════════════════════
+   SECTIONS
+════════════════════════════════ */
+section {
+    background: #fff;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    border: 1px solid #f0e6f5;
+}
+
+section div {
+    background: #fdf8fc;
+    border: 1px solid #f0d6e8;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 15px;
+}
+
+/* ════════════════════════════════
+   INPUTS
+════════════════════════════════ */
+input, select {
+    margin: 5px;
+    padding: 9px 14px;
+    width: 210px;
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    color: #333;
+    background: #fff;
+    transition: border 0.2s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #b5478a;
+    box-shadow: 0 0 0 3px rgba(181,71,138,0.1);
+}
+
+input::placeholder {
+    color: #bbb;
+    font-size: 0.82rem;
+}
+
+/* ════════════════════════════════
+   BUTTONS
+════════════════════════════════ */
+button {
+    margin: 5px;
+    padding: 9px 18px;
+    background: linear-gradient(135deg, #b5478a, #7c2d6b);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    box-shadow: 0 3px 10px rgba(181,71,138,0.25);
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(181,71,138,0.35);
+    background: linear-gradient(135deg, #c45a9a, #8e3069);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* ════════════════════════════════
+   TABLES
+════════════════════════════════ */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 15px;
+    font-size: 0.88rem;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th {
+    background: linear-gradient(135deg, #b5478a, #7c2d6b);
+    color: white;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 0.82rem;
+    letter-spacing: 0.5px;
+}
+
+td {
+    padding: 11px 15px;
+    border-bottom: 1px solid #f5eef9;
+    color: #444;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background: #fdf5fa;
+}
+
+/* ════════════════════════════════
+   SHADE CIRCLES
+════════════════════════════════ */
+#shade-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#shade-list div {
+    background: #fff !important;
+    border: 1px solid #f0d6e8 !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    text-align: center;
+    margin: 0 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    min-width: 90px;
+}
+
+/* ════════════════════════════════
+   VERIFY RESULT
+════════════════════════════════ */
+#verify-result h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 12px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: #fdf5fa;
+    border: 1px solid #f0d6e8;
+    display: inline-block;
+}
+
+#qr-code {
+    margin-top: 12px;
+}
+
+#qr-code img {
+    border: 3px solid #b5478a;
+    border-radius: 12px;
+    padding: 6px;
+    background: #fff;
+}
+
+#qr-code p {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 6px;
+}
