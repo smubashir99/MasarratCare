@@ -179,7 +179,7 @@ tr:hover td {
 }
 
 #shade-list div {
-    background: #fff !important;
+    background: unset;
     border: 1px solid #f0d6e8 !important;
     border-radius: 12px !important;
     padding: 12px !important;
