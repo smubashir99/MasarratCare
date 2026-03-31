@@ -2,20 +2,43 @@ const API = 'http://127.0.0.1:5000'
 
 //  PRODUCTS
 
+// get EUR price for a product using exchange rate API
+async function getEURPrice(pkrPrice) {
+    try {
+        const res  = await fetch('https://api.exchangerate-api.com/v4/latest/PKR')
+        const data = await res.json()
+        const eur  = (pkrPrice * data.rates.EUR).toFixed(2)
+        return eur
+    } catch {
+        return 'N/A'
+    }
+}
+
+// load products and show in table with EUR price
 async function loadProducts() {
-    const res  = await fetch(`${API}/products`)
-    const data = await res.json()
+    const res  = await fetch(`${API}/products`);
+    const data = await res.json();
+    
+    // Clear existing table rows
+    const tbody = document.getElementById('product-list');
+    tbody.innerHTML = '';
 
-    const tbody = document.getElementById('product-list')
-    tbody.innerHTML = ''
+    // Map each product to a promise that resolves to its EUR price
+    const eurPrices = await Promise.all(
+        data.map(p => getEURPrice(p.price))
+    );
 
-    data.forEach(p => {
-        tbody.innerHTML += `
+    let html = '';
+    
+    // Loop through products and their corresponding EUR prices to build table rows
+    data.forEach((p, index) => {
+        const eur = eurPrices[index];
+        html += `
             <tr>
                 <td>${p.id}</td>
                 <td>${p.name}</td>
                 <td>${p.category}</td>
-                <td>Rs. ${p.price}</td>
+                <td>Rs. ${p.price} (€${eur})</td>
                 <td>${p.description}</td>
                 <td>
                     <button onclick="editProduct(${p.id}, '${p.name}',
@@ -27,8 +50,10 @@ async function loadProducts() {
                     </button>
                 </td>
             </tr>
-        `
-    })
+        `;
+    });
+
+    tbody.innerHTML = html;
 }
 
 // add new product
