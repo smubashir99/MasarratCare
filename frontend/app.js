@@ -30,6 +30,21 @@ async function loginUser() {
     }
 }
 
+// allow pressing Enter key to submit login or register form
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+       // Check which form is currently visible and call the appropriate function
+        const loginSection = document.getElementById('login-section')
+        const registerSection = document.getElementById('register-section')
+        
+        if (loginSection.style.display !== 'none') {
+            loginUser()
+        } else if (registerSection.style.display !== 'none') {
+            registerUser()
+        }
+    }
+})
+
 // register new user and show message on success or failure
 async function registerUser() {
     const username = document.getElementById('r-username').value
