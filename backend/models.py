@@ -160,3 +160,26 @@ def remove_from_wishlist(id):
     conn.execute("DELETE FROM wishlist WHERE id=?", [id])
     conn.commit()
     conn.close()
+
+#  USERS
+
+#  For user authentication and role management
+def create_user(username, password, role='user'):
+    conn = get_db()
+    conn.execute(
+        "INSERT INTO users (username, password, role) VALUES (?,?,?)",
+        [username, password, role]
+    )
+    conn.commit()
+    conn.close()
+    
+#  Get user by username for authentication
+def get_user(username):
+    conn = get_db()
+    row = conn.execute(
+        "SELECT * FROM users WHERE username=?", [username]
+    ).fetchone()
+    conn.close()
+    if row:
+        return dict(row)
+    return None
