@@ -62,6 +62,16 @@ def init_db():
             FOREIGN KEY (product_id) REFERENCES products(id)
         )
     """)
+    
+    # Create users table to store user credentials and roles
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id       INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT UNIQUE NOT NULL,
+            password TEXT NOT NULL,
+            role     TEXT DEFAULT 'user'
+        )
+    """)
 
     conn.commit()
     conn.close()
