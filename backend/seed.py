@@ -71,5 +71,15 @@ def seed():
     print("Test Genuine: MM-LG-2024-001")
     print("Test Fake:    FAKE-001")
 
+    #  DEFAULT USERS
+
+    from models import create_user
+    try:
+        create_user('admin', 'admin123', 'admin')
+        create_user('user1', 'user123',  'user')
+        print("users seeded!")
+    except:
+        print("users already exist!")
+
 if __name__ == '__main__':
     seed()
