@@ -190,5 +190,37 @@ def delete_wishlist(id):
     remove_from_wishlist(id)
     return jsonify({'message': 'Removed from wishlist'})
 
+#  AUTH ROUTES
+
+#  For simplicity, we are using basic username/password authentication without tokens.
+from models import create_user, get_user
+
+#  In a production app, you would want to implement proper authentication with hashed passwords and tokens (e.g., JWT).
+@app.route('/register', methods=['POST'])
+def register():
+    data = request.get_json()
+    existing = get_user(data['username'])
+    if existing:
+        return jsonify({'message': 'User already exists'}), 400
+    create_user(data['username'], data['password'], 
+                data.get('role', 'user'))
+    return jsonify({'message': 'User registered'}), 201
+
+#  Login route checks username and password, and returns user role for frontend to manage access control
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    user = get_user(data['username'])
+    if not user:
+        return jsonify({'message': 'User not found'}), 404
+    if user['password'] != data['password']:
+        return jsonify({'message': 'Wrong password'}), 401
+    return jsonify({
+        'message': 'Login successful',
+        'username': user['username'],
+        'role':     user['role']
+    }), 200
+
+#  ADMIN ROUTES FOR USER MANAGEMENT (Optional, can be expanded as needed)
 if __name__ == '__main__':
     app.run(debug=True)
