@@ -1,5 +1,81 @@
 const API = 'http://127.0.0.1:5000'
 
+//  AUTH
+
+let currentUser = null
+
+// login user and show main content on success
+async function loginUser() {
+    const username = document.getElementById('l-username').value
+    const password = document.getElementById('l-password').value
+
+    const res  = await fetch(`${API}/login`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ username, password })
+    })
+    const data = await res.json()
+
+    if (res.ok) {
+        currentUser = data
+        document.getElementById('login-section').style.display    = 'none'
+        document.getElementById('register-section').style.display = 'none'
+        document.getElementById('user-bar').style.display         = 'block'
+        document.getElementById('main-content').style.display     = 'block'
+        document.getElementById('logged-username').textContent    = data.username
+        loadProducts()
+    } else {
+        document.getElementById('login-msg').textContent = data.message
+        document.getElementById('login-msg').style.color = 'red'
+    }
+}
+
+// register new user and show message on success or failure
+async function registerUser() {
+    const username = document.getElementById('r-username').value
+    const password = document.getElementById('r-password').value
+
+    const res  = await fetch(`${API}/register`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ username, password })
+    })
+    const data = await res.json()
+
+    if (res.ok) {
+        document.getElementById('register-msg').textContent = 
+            'Registered! Please login now.'
+        document.getElementById('register-msg').style.color = 'green'
+        setTimeout(showLogin, 1500)
+    } else {
+        document.getElementById('register-msg').textContent = data.message
+        document.getElementById('register-msg').style.color = 'red'
+    }
+}
+
+// logout user and hide main content
+function logoutUser() {
+    currentUser = null
+    document.getElementById('login-section').style.display    = 'block'
+    document.getElementById('user-bar').style.display         = 'none'
+    document.getElementById('main-content').style.display     = 'none'
+    document.getElementById('l-username').value = ''
+    document.getElementById('l-password').value = ''
+    document.getElementById('login-msg').textContent = ''
+}
+
+// show register form and hide login form
+function showRegister() {
+    document.getElementById('login-section').style.display    = 'none'
+    document.getElementById('register-section').style.display = 'block'
+}
+
+// show login form and hide register form
+function showLogin() {
+    document.getElementById('register-section').style.display = 'none'
+    document.getElementById('login-section').style.display    = 'block'
+}
+
 //  PRODUCTS
 
 // get EUR price for a product using exchange rate API
@@ -464,4 +540,4 @@ async function removeWishlist(id) {
 
 // initial load of products
 
-loadProducts()
+//loadProducts()

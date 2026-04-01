@@ -9,6 +9,53 @@
 
 <h1>MasarratCare — Product Authenticity & Shade Finder</h1>
 
+<!--  LOGIN SECTION  -->
+
+<section id="login-section">
+    <h2>🔐 Login</h2>
+    <div>
+        <h3>Login to MasarratCare</h3>
+        <input type="text"     id="l-username" placeholder="Username">
+        <input type="password" id="l-password" placeholder="Password">
+        <button onclick="loginUser()">Login</button>
+        <button onclick="showRegister()">Register</button>
+        <p id="login-msg"></p>
+    </div>
+</section>
+
+<!--  REGISTER SECTION -->
+
+<section id="register-section" style="display:none">
+    <h2>📝 Register</h2>
+    <div>
+        <h3>Create Account</h3>
+        <input type="text"     id="r-username" placeholder="Username">
+        <input type="password" id="r-password" placeholder="Password">
+        <button onclick="registerUser()">Register</button>
+        <button onclick="showLogin()">Back to Login</button>
+        <p id="register-msg"></p>
+    </div>
+</section>
+
+
+<!--  LOGGED IN BAR  -->
+
+<div id="user-bar" style="display:none; 
+     background:#b5478a; color:white; 
+     padding:10px 20px; border-radius:8px; 
+     margin-bottom:15px;">
+    👤 Logged in as: <strong id="logged-username"></strong>
+    <button onclick="logoutUser()" 
+            style="margin-left:20px; 
+                   background:white; 
+                   color:#b5478a;">
+        Logout
+    </button>
+</div>
+
+<!-- Main content — hidden until login -->
+<div id="main-content" style="display:none">
+
 <!--  PRODUCTS SECTION  -->
 
 <section>
@@ -177,5 +224,6 @@
 </section>
 
 <script src="app.js"></script>
+</div> <!-- main-content end -->
 </body>
 </html>
