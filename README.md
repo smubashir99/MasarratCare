@@ -20,3 +20,16 @@ physical shops but has no digital system. Customers cant
 tell if a product is real or fake, and they struggle to 
 find the right shade. I thought this was a good real-world 
 problem to solve for this project.
+
+## What the system does
+
+MasarratCare is a web app I built using Flask, SQLite and vanilla JavaScript. The main features are:
+
+- login and register system
+- check if a product batch code is genuine or fake
+- QR code generated for genuine products only
+- find shades for a product with colour circles
+- price shown in both PKR and EUR using currency API
+- add products to a wishlist
+- leave reviews for products
+- full admin control - add, edit, delete products/shades/batches
