@@ -10,16 +10,10 @@
 
 ## Why I picked this company
 
-I chose Masarrat Misbah Makeup because its a real Pakistani 
-cosmetics brand that I actually know from back home. You can 
-find them on Google Maps:
+I chose Masarrat Misbah Makeup because its a real Pakistani cosmetics brand that I actually know from back home. You can find them on Google Maps:
 https://www.google.com/maps/search/?api=1&query=Masarrat+Misbah+Makeup+Lahore
 
-The problem I noticed is that the company sells through 
-physical shops but has no digital system. Customers cant 
-tell if a product is real or fake, and they struggle to 
-find the right shade. I thought this was a good real-world 
-problem to solve for this project.
+The problem I noticed is that the company sells through physical shops but has no digital system. Customers cant tell if a product is real or fake, and they struggle to find the right shade. I thought this was a good real-world problem to solve for this project.
 
 ## What the system does
 
