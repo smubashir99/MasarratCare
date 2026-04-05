@@ -131,3 +131,11 @@ using foreign keys:
 | GET | /wishlist | gets wishlist with product names |
 | POST | /wishlist | adds to wishlist |
 | DELETE | /wishlist/\<id\> | removes from wishlist |
+
+## External APIs used
+
+**1. QR Server API** — https://goqr.me/api  
+generates a QR code image when a batch code is verified as genuine. only shows for genuine products not fake ones. no api key needed, its free.
+
+**2. Exchange Rate API** — https://api.exchangerate-api.com  
+converts product prices from PKR to EUR. shows both currencies in the products table. relevant since this is being presented in Dublin!
