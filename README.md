@@ -104,3 +104,30 @@ using foreign keys:
 | batch_codes | batch number and genuine/fake flag |
 | reviews | reviewer name, rating, comment |
 | wishlist | product saved by a user |
+
+## API routes
+
+| method | route | what it does |
+|---|---|---|
+| POST | /register | creates new user account |
+| POST | /login | checks credentials, returns user info |
+| GET | /ping | checks server is alive |
+| GET | /products | returns all products with EUR price |
+| POST | /products | adds a new product |
+| PUT | /products/\<id\> | edits a product |
+| DELETE | /products/\<id\> | deletes a product |
+| GET | /shades/\<id\> | gets shades for a product |
+| POST | /shades | adds a shade |
+| PUT | /shades/\<id\> | edits a shade |
+| DELETE | /shades/\<id\> | deletes a shade |
+| POST | /batch | adds a batch code |
+| GET | /batch/verify/\<code\> | checks genuine or fake |
+| GET | /batch | gets all batch codes |
+| PUT | /batch/\<id\> | edits a batch code |
+| DELETE | /batch/\<id\> | deletes a batch code |
+| GET | /reviews | gets all reviews with product name |
+| POST | /reviews | adds a review |
+| DELETE | /reviews/\<id\> | deletes a review |
+| GET | /wishlist | gets wishlist with product names |
+| POST | /wishlist | adds to wishlist |
+| DELETE | /wishlist/\<id\> | removes from wishlist |
