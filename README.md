@@ -173,3 +173,43 @@ genuine: MM-LG-2024-001, MM-LG-2024-002,
          MM-SF-2024-001, MM-ES-2024-001
 
 fake: FAKE-001, FAKE-002
+
+## What I would improve
+
+if I had more time I would add:
+- password hashing using bcrypt for better security
+- proper session tokens instead of localStorage
+- image upload for each product
+- better shade matching using a photo upload
+
+## References
+
+All references are mentioned in GitHub commit messages and inside code comments throughout the project.
+
+### External Libraries and Tools
+
+| # | Reference | Link | License | Used In |
+|---|---|---|---|---|
+| 1 | Flask | https://flask.palletsprojects.com | BSD-3-Clause | backend/app.py — main server framework |
+| 2 | Flask-CORS | https://flask-cors.readthedocs.io | MIT | backend/app.py — cross origin requests |
+| 3 | pytest | https://pytest.org | MIT | tests/ — all test files |
+| 4 | requests | https://requests.readthedocs.io | Apache 2.0 | tests/test_ping.py — integration test |
+| 5 | SQLite | https://sqlite.org | Public Domain | backend/db.py — database |
+| 6 | QR Server API | https://goqr.me/api | Free non-commercial | frontend/app.js — verifyBatch() function |
+| 7 | Exchange Rate API | https://exchangerate-api.com | Free tier | frontend/app.js — getEURPrice() function |
+| 8 | Google Fonts Poppins | https://fonts.google.com | Open Font License | frontend/style.css — typography |
+
+### AI and Online Help
+
+| # | What | Where Used | Commit Reference |
+|---|---|---|---|
+| 1 | ChatGPT — helped recall INSERT query syntax | backend/models.py — create_review() | commit: "Ref: ChatGPT helped with INSERT query syntax for reviews" |
+| 2 | ChatGPT — route parameter syntax for int:id | backend/app.py — shade routes | commit: "Ref: ChatGPT helped with route parameter syntax" |
+| 3 | ChatGPT — inline style for colour circles | frontend/app.js — loadShades() | commit: "Ref: ChatGPT helped with inline style for colour circles" |
+| 4 | ChatGPT — assert any() pattern for tests | tests/test_models_review.py | commit: "Ref: ChatGPT helped with assert any() pattern" |
+| 5 | ChatGPT — CSS styling guidance | frontend/style.css | commit: "Ref: ChatGPT helped with CSS styling" |
+| 6 | QR Server API docs — URL format | frontend/app.js — verifyBatch() | commit: "Ref: qrserver.com API docs for url format" |
+| 7 | exchangerate-api.com docs | frontend/app.js — getEURPrice() | commit: "Ref: exchangerate-api.com" |
+| 8 | Google Fonts docs | frontend/style.css | commit: "Ref: Google Fonts Poppins for typography" |
+
+I have used Chrome and AI tools to help with specific parts of the code. All AI usage is referenced in GitHub commit messages. The overall idea, system design, architecture decisions and majority of the code is my own work.
