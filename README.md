@@ -82,3 +82,25 @@ default login credentials:
 - admin: username = admin | password = admin123
 - user:  username = user1 | password = user123
 
+## Architecture
+
+the frontend never refreshes the page - everything goes through fetch() calls to the Flask API. Flask talks to SQLite and sends back JSON. the frontend then updates the DOM directly.
+
+index.html + app.js  →  fetch()  →  Flask API  →  SQLite
+          ←  JSON response  ←
+
+I added CORS so the browser doesnt block requests between different ports. login state is saved in localStorage so user stays logged in after page refresh.
+
+## Database
+
+I used SQLite with 6 tables, all linked to products 
+using foreign keys:
+
+| table | what it stores |
+|---|---|
+| users | username, password, role |
+| products | name, category, price, description |
+| shades | shade name and hex colour code |
+| batch_codes | batch number and genuine/fake flag |
+| reviews | reviewer name, rating, comment |
+| wishlist | product saved by a user |
