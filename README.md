@@ -139,3 +139,37 @@ generates a QR code image when a batch code is verified as genuine. only shows f
 
 **2. Exchange Rate API** — https://api.exchangerate-api.com  
 converts product prices from PKR to EUR. shows both currencies in the products table. relevant since this is being presented in Dublin!
+
+## Testing
+
+to run all tests:
+```bash
+python -m pytest tests/ -v
+```
+
+I wrote 5 unit test files, one for each model. each file tests the basic create, read and delete functions.
+
+the integration test (test_ping.py) actually sends a real HTTP request to the running flask server and checks the response. that one needs the server running first.
+
+all 18 tests passed:
+18 passed in 0.18s
+
+unit tests:
+- test_models_product.py  — create, read, delete product
+- test_models_shade.py    — create, read, delete shade
+- test_models_batch.py    — genuine, fake, not found
+- test_models_review.py   — create, read, delete review
+- test_models_wishlist.py — add, get, remove wishlist
+
+integration test:
+- test_ping.py — sends HTTP GET to /ping and /products,
+  checks status 200 and correct JSON response
+
+## Test batch codes
+
+after running seed.py these batch codes work:
+
+genuine: MM-LG-2024-001, MM-LG-2024-002,
+         MM-SF-2024-001, MM-ES-2024-001
+
+fake: FAKE-001, FAKE-002
