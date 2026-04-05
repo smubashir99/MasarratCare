@@ -57,3 +57,28 @@ MasarratCare/
 ├── README.md
 └── .gitignore
 
+## How to run it
+
+first install the requirements:
+```bash
+pip install -r requirements.txt
+```
+
+then start the backend — keep this terminal open:
+```bash
+cd backend
+python app.py
+```
+
+add the sample data and default users:
+```bash
+python seed.py
+```
+
+then open frontend/index.html using Live Server in VS Code.
+opens on http://127.0.0.1:5500
+
+default login credentials:
+- admin: username = admin | password = admin123
+- user:  username = user1 | password = user123
+
