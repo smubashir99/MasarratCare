@@ -27,3 +27,33 @@ MasarratCare is a web app I built using Flask, SQLite and vanilla JavaScript. Th
 - add products to a wishlist
 - leave reviews for products
 - full admin control - add, edit, delete products/shades/batches
+
+## Project Structure
+
+MasarratCare/
+│
+├── backend/
+│ ├── db.py — sets up SQLite database and 6 tables
+│ ├── models.py — all the CRUD functions
+│ ├── app.py — Flask routes (the API)
+│ └── seed.py — adds sample data and default users
+│
+├── frontend/
+│ ├── index.html — main page with all sections
+│ ├── app.js — fetch() calls to the API
+│ ├── style.css — pink theme using Poppins font
+│ └── config.json — stores the API base URL
+│
+├── tests/
+│ ├── conftest.py — sets up DB before tests run
+│ ├── test_ping.py — integration test
+│ ├── test_models_product.py — product unit tests
+│ ├── test_models_shade.py — shade unit tests
+│ ├── test_models_batch.py — batch unit tests
+│ ├── test_models_review.py — review unit tests
+│ └── test_models_wishlist.py — wishlist unit tests
+│
+├── requirements.txt
+├── README.md
+└── .gitignore
+
