@@ -18,6 +18,8 @@ async function loginUser() {
 
     if (res.ok) {
         currentUser = data
+        // Store user data in localStorage to persist login across page refreshes
+        localStorage.setItem('currentUser', JSON.stringify(data))
         document.getElementById('login-section').style.display    = 'none'
         document.getElementById('register-section').style.display = 'none'
         document.getElementById('user-bar').style.display         = 'block'
@@ -71,6 +73,8 @@ async function registerUser() {
 // logout user and hide main content
 function logoutUser() {
     currentUser = null
+    // Remove user data from localStorage on logout
+    localStorage.removeItem('currentUser')  
     document.getElementById('login-section').style.display    = 'block'
     document.getElementById('user-bar').style.display         = 'none'
     document.getElementById('main-content').style.display     = 'none'
@@ -556,3 +560,15 @@ async function removeWishlist(id) {
 // initial load of products
 
 //loadProducts()
+
+// Check if user data is saved in localStorage and auto-login if found
+const savedUser = localStorage.getItem('currentUser')
+if (savedUser) {
+    currentUser = JSON.parse(savedUser)
+    document.getElementById('login-section').style.display    = 'none'
+    document.getElementById('register-section').style.display = 'none'
+    document.getElementById('user-bar').style.display         = 'block'
+    document.getElementById('main-content').style.display     = 'block'
+    document.getElementById('logged-username').textContent    = currentUser.username
+    loadProducts()
+}
