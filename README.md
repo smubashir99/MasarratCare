@@ -617,6 +617,8 @@ and ChatGPT as co-pilot tools.
 | Claude (Anthropic)   | N/A - AI tool       | anthropic.com             |
 | ChatGPT (OpenAI)     | N/A - AI tool       | openai.com                |
 
+I have used Chrome and AI tools to help with specific parts of the code. All AI usage is referenced in GitHub commit messages. The overall idea, system design, architecture decisions and majority of the code is my own work.
+
 ---
 
 ## 11. Challenges & Improvements
