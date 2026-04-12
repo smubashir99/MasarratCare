@@ -48,6 +48,16 @@ This project is a web application built to solve the problem of product authenti
 
 **Live Demo:** https://masarratcare-v5nk.onrender.com/
 
+**GitHub Repository:** https://github.com/smubashir99/MasarratCare
+
+## Tech Stack
+
+Frontend: HTML, CSS, Vanilla JavaScript  
+Backend: Python Flask REST API  
+Database: SQLite  
+Testing: pytest  
+Deployment: Render
+
 ---
 
 ## 2. Organisation & Problem Statement
