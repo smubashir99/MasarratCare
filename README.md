@@ -223,7 +223,7 @@ Reviews and wishlist items display product names using a SQL LEFT JOIN query - n
 
 ### Storage Choice
 
-SQLite was chosen as the database. It is a lightweight file-based database built into Python - no separate server installation is required. All data is stored in a single file (medora.db). It supports full SQL including CREATE, INSERT, UPDATE, DELETE and JOIN queries. The assignment explicitly allows SQLite as a valid backend option.
+SQLite was chosen as the database. It is a lightweight file-based database built into Python - no separate server installation is required. All data is stored in a single file (masarratcare.db). It supports full SQL including CREATE, INSERT, UPDATE, DELETE and JOIN queries. The assignment explicitly allows SQLite as a valid backend option.
 
 ---
 
@@ -255,7 +255,7 @@ SQLite was chosen as the database. It is a lightweight file-based database built
 
 ### Database - SQLite
 
-- Single file database: medora.db
+- Single file database: masarratcare.db
 - 6 tables with foreign key relationships
 - init_db() creates all tables on startup if they do not exist
 - auto_seed() inserts sample data if products table is empty
@@ -278,7 +278,7 @@ Browser → https://masarratcare-v5nk.onrender.com
 → Flask (gunicorn)
 → Serves index.html (static file)
 → API calls go to same server (/products, /shades etc.)
-→ SQLite database (medora.db)
+→ SQLite database (masarratcare.db)
 → auto_seed() runs on startup
 
 ## API routes
@@ -616,7 +616,7 @@ and ChatGPT as co-pilot tools.
 
 - All AI-generated code was reviewed before use
 - Several parts required manual correction:
-  - db.py path used "medora.db" directly - caused 
+  - db.py path used "masarratcare.db" directly - caused 
     OperationalError on Render - fixed with os.path
   - app.js API URL used localhost - broke on Render - 
     fixed to use relative URL ('')
@@ -654,10 +654,10 @@ I have used Chrome and AI tools to help with specific parts of the code. All AI 
 
 #### 1. SQLite Path Issue on Render
 
-- Local development used "medora.db" as the database path
+- Local development used "masarratcare.db" as the database path
 - On Render, the working directory is different from the file location
 - Flask could not find the database file - caused OperationalError
-- **Fix:** Used os.path.dirname(os.path.abspath(__file__)) to build an absolute path to medora.db relative to db.py
+- **Fix:** Used os.path.dirname(os.path.abspath(__file__)) to build an absolute path to masarratcare.db relative to db.py
 
 #### 2. API URL Breaking on Render
 
