@@ -47,6 +47,7 @@
 This project is a web application built to solve the problem of product authenticity and shade selection for Masarrat Misbah Makeup - a real Pakistani cosmetics company identifiable on Google Maps. The company sells products through physical retail shops but has no digital system. Customers cannot verify if their product is genuine or fake, and they struggle to find the right shade for their skin tone.The app allows customers to verify product batch codes, find shades, save products to a wishlist, and leave reviews. Admin users can manage products, shades, and batch codes through a full CRUD interface. The system is built using Python Flask as the backend API, SQLite for data storage, and vanilla JavaScript as the frontend. The app follows a client-server model with REST APIs and no page reloads.
 
 **Live Demo:** https://masarratcare-v5nk.onrender.com/
+**Note:** First visit may take 30–60 seconds because the Render server sleeps when inactive.
 
 **GitHub Repository:** https://github.com/smubashir99/MasarratCare
 
